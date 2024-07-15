@@ -1,0 +1,11 @@
+<div class="d-flex flex-column align-items-center text-center p-3 py-5">
+    {% if student.id_card_image.url %}
+    <img src="{{ student.id_card_image.url }}" alt="Raised circle image" class="img-fluid rounded-circle shadow-lg" style="width: 150px; height: 150px; object-fit: cover;">
+    {% else %}
+    <img src="/media/app/assets/default.jpg" alt="Raised circle image" class="img-fluid rounded-circle shadow-lg" style="width: 150px; height: 150px; object-fit: cover;">
+    {% endif %}
+    <div class="btn btn-secondary mt-4">
+        New Photo
+        <input class="blk-file" name="{{ form.id_card_image.name }}" type="file" accept="image/*">    
+    </div>
+</div>

@@ -1,0 +1,96 @@
+{% extends "app/layout.html" %}
+
+{% load static %}
+{% load my_tags %}
+
+{% block content %}
+
+<div class="landing-page d-flex flex-column h-100">
+
+    <span class="mt-5"></span>
+
+    <div class="container-xxl p-3 mt-5">
+        <!-- Filter card element -->
+        {% include 'app/elements/filter1.html' %}
+
+        <div class="card">
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Student ID</th>
+                            <th scope="col">Intake</th>
+                            <th scope="col">Academic year</th>
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Current Term</th>
+                            <th scope="col">Fee status</th>
+                            <th scope="col">Registration</th>
+                            <th scope="col">Resource</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for student in object_list %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter0|add:page_obj.start_index }}</th>
+                            <td>{{ student.student_id }}</td>
+                            <td>{{ student.intake }}</td>
+                            <td>{{ student.academic_year }}</td>
+                            <td><a class="btn btn-link btn-primary" href="{% url 'profile' student.pk %}">{{ student.name }}</a></td>
+                            <td>{{ student.current_term }}</td>
+                            {% if student.fees_confirmed %}
+                            <td><span class="badge badge-success">Paid</span></td>
+                            {% else %}
+                            <td><span class="badge badge-warning">Not paid</span></td>
+                            {% endif %}
+
+                            {% if student.welcome_mail_sent %}
+                            <td><span class="badge badge-success">Sent</span></td>
+                            {% else %}
+                            <td><span class="badge badge-warning">Not sent</span></td>
+                            {% endif %}
+
+                            {% if student.class_resources_sent %}
+                            <td><span class="badge badge-success">Sent</span></td>
+                            {% else %}
+                            <td><span class="badge badge-warning">Not sent</span></td>
+                            {% endif %}
+                            <td class="td-actions text-center">
+                                <div class="btn-group" data-toggle="tooltip" data-placement="top" title="Generate ID card">
+                                    <a class="btn btn-info btn-sm btn-icon" data-toggle="modal" data-target="#success_model" onclick="sendSignal('generate_qr_code', '{{ student.pk }}')">
+                                        <i class="tim-icons icon-badge"></i>
+                                    </a>
+                                </div>
+                                <div class="btn-group" data-toggle="tooltip" data-placement="top" title="Send">
+                                    <a class="btn btn-success btn-sm btn-icon dropdown-toggle" data-toggle="dropdown">
+                                        <i class="tim-icons icon-send"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-with-icons" aria-labelledby="dropdownMenuLink">
+                                        <form action="#" method="get">
+                                            <a class="dropdown-item" type="button" data-toggle="modal" data-target="#success_model" onclick="sendSignal('send_registration_mail', '{{ student.pk }}')">
+                                                <i class="tim-icons icon-single-copy-04"></i> Registration mail
+                                            </a>
+                                            <a class="dropdown-item" type="button" data-toggle="modal" data-target="#success_model" onclick="sendSignal('send_resource_mail', '{{ student.pk }}')">
+                                                <i class="tim-icons icon-spaceship"></i> Resource mail
+                                            </a>
+                                        </form>
+                                    </div>
+                                </div>
+                                <a class="btn btn-danger btn-sm btn-icon" href="{% url 'delete' student.pk %}" data-toggle="tooltip" data-placement="top" title="DELETE">
+                                    <i class="tim-icons icon-simple-remove"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    <!-- Pagination -->
+     {% include 'app/elements/pagination.html' %}
+    </div>
+</div>
+
+{% endblock content %}

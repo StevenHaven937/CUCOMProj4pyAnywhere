@@ -1,0 +1,118 @@
+<div class="mt-5 px-2 pb-4 pt-0">
+    <div class="d-flex justify-content-between align-items-center experience"><h6>Admission Status</h6></div>
+    {% if student.fees_confirmed %}
+    <div class="form-check mt-1"><label class="form-check-label"><input name="{{ form.fees_confirmed.name }}" class="form-check-input" type="checkbox" checked><span class="form-check-sign"></span>Fees paid & confirmed</label></div>
+    {% else %}
+    <div class="form-check mt-1"><label class="form-check-label"><input name="{{ form.fees_confirmed.name }}" class="form-check-input" type="checkbox"><span class="form-check-sign"></span>Fees paid & confirmed</label></div>
+    {% endif %}
+
+    {% if student.offer_letter_sent %}
+    <div class="form-check mt-1"><label class="form-check-label"><input name="{{ form.offer_letter_sent.name }}" class="form-check-input" type="checkbox" checked><span class="form-check-sign"></span>Offer letter sent</label></div>
+    {% else %}
+    <div class="form-check mt-1"><label class="form-check-label"><input name="{{ form.offer_letter_sent.name }}" class="form-check-input" type="checkbox"><span class="form-check-sign"></span>Offer letter sent</label></div>
+    {% endif %}
+
+    {% if student.offer_letter_signed %}
+    <div class="form-check mt-1"><label class="form-check-label"><input name="{{ form.offer_letter_signed.name }}" class="form-check-input" type="checkbox" checked><span class="form-check-sign"></span>Offer letter signed</label></div>
+    {% else %}
+    <div class="form-check mt-1"><label class="form-check-label"><input name="{{ form.offer_letter_signed.name }}" class="form-check-input" type="checkbox"><span class="form-check-sign"></span>Offer letter signed</label></div>
+    {% endif %}
+
+    <div class="col-md-12 mt-3"><label class="labels">Offer letter signed on?</label><input type="date" class="form-control" name="{{ form.offer_letter_signed_on.name }}" placeholder="Date of birth" value="{{ student.offer_letter_signed_on|date:'Y-m-d' }}" /></div>
+
+    <!-- Degree element -->
+    <p class="category">Degree</p>
+    {% for value, label in degrees.items %}
+    <div class="form-check form-check-radio mt-1">
+        <label class="form-check-label">
+            {% if student.degree == value %}
+            <input class="form-check-input" type="radio" name="{{ form.degree.name }}" id="degree_id" value="{{ value }}" checked>
+            {% else %}
+            <input class="form-check-input" type="radio" name="{{ form.degree.name }}" id="degree_id" value="{{ value }}">
+            {% endif %}
+            <span class="form-check-sign"></span>
+            {{ label }}
+        </label>
+    </div>
+    {% endfor %}
+
+    <!-- Program element -->
+    <p class="category mt-3">Program</p>
+    {% for value, label in programs.items %}
+    <div class="form-check form-check-radio mt-1">
+        <label class="form-check-label">
+            {% if student.program == value %}
+            <input class="form-check-input" type="radio" name="{{ form.program.name }}" id="prog_id" value="{{ value }}" checked>
+            {% else %}
+            <input class="form-check-input" type="radio" name="{{ form.program.name }}" id="prog_id" value="{{ value }}">
+            {% endif %}
+            <span class="form-check-sign"></span>
+            {{ label }}
+        </label>
+    </div>
+    {% endfor %}
+
+    <!-- ID card validity element -->
+    <label class="labels mt-3">ID card validity</label>
+    <div class="row row-cols-3">
+        <div class="col pe-2"><input class="form-control" name="id_valid_from" type="text" placeholder="from" value="{{ id_val_from }}" maxlength="4" /></div>
+        <div class="col-auto d-flex p-0 align-self-center justify-content-center"><h6 class="mb-0">-</h6></div>
+        <div class="col ps-2"><input class="form-control" name="id_valid_to" type="text" placeholder="to" value="{{ id_val_to }}" maxlength="4" /></div>
+    </div>
+</div>
+
+<div class="px-3 pb-4 pt-0">
+    <div class="d-flex justify-content-between align-items-center experience"><h6>Sent items</h6></div>
+    {% if student.id_card_created %}
+    <div class="form-check mt-1"><label class="form-check-label"><input name="{{ form.id_card_created.name }}" class="form-check-input" type="checkbox" checked><span class="form-check-sign"></span>ID card created</label></div>
+    {% else %}
+    <div class="form-check mt-1"><label class="form-check-label"><input name="{{ form.id_card_created.name }}" class="form-check-input" type="checkbox"><span class="form-check-sign"></span>ID card created</label></div>
+    {% endif %}
+
+    {% if student.welcome_mail_sent %}
+    <div class="form-check mt-1"><label class="form-check-label"><input name="{{ form.welcome_mail_sent.name }}" class="form-check-input" type="checkbox" checked><span class="form-check-sign"></span>Welcome mail</label></div>
+    {% else %}
+    <div class="form-check mt-1"><label class="form-check-label"><input name="{{ form.welcome_mail_sent.name }}" class="form-check-input" type="checkbox"><span class="form-check-sign"></span>Welcome mail</label></div>
+    {% endif %}
+
+    {% if student.orientation_mail_sent %}
+    <div class="form-check mt-1"><label class="form-check-label"><input name="{{ form.orientation_mail_sent.name }}" class="form-check-input" type="checkbox" checked><span class="form-check-sign"></span>Orientation mail</label></div>
+    {% else %}
+    <div class="form-check mt-1"><label class="form-check-label"><input name="{{ form.orientation_mail_sent.name }}" class="form-check-input" type="checkbox"><span class="form-check-sign"></span>Orientation mail</label></div>
+    {% endif %}
+
+    {% if student.class_resources_sent %}
+    <div class="form-check mt-1"><label class="form-check-label"><input name="{{ form.class_resources_sent.name }}" class="form-check-input" type="checkbox" checked><span class="form-check-sign"></span>Class resource</label></div>
+    {% else %}
+    <div class="form-check mt-1"><label class="form-check-label"><input name="{{ form.class_resources_sent.name }}" class="form-check-input" type="checkbox"><span class="form-check-sign"></span>Class resource</label></div>
+    {% endif %}
+
+    {% if student.lms_invitation_sent %}
+    <div class="form-check mt-1"><label class="form-check-label"><input name="{{ form.lms_invitation_sent.name }}" class="form-check-input" type="checkbox" checked><span class="form-check-sign"></span>LMS invitation</label></div>
+    {% else %}
+    <div class="form-check mt-1"><label class="form-check-label"><input name="{{ form.lms_invitation_sent.name }}" class="form-check-input" type="checkbox"><span class="form-check-sign"></span>LMS invitation</label></div>
+    {% endif %}
+
+    {% if student.id_card_issued %}
+    <div class="form-check mt-1"><label class="form-check-label"><input name="{{ form.id_card_issued.name }}" class="form-check-input" type="checkbox" checked><span class="form-check-sign"></span>ID card sent</label></div>
+    {% else %}
+    <div class="form-check mt-1"><label class="form-check-label"><input name="{{ form.id_card_issued.name }}" class="form-check-input" type="checkbox"><span class="form-check-sign"></span>ID card sent</label></div>
+    {% endif %}
+
+    {% if student.whatsapp_invitation_sent %}
+    <div class="form-check mt-1"><label class="form-check-label"><input name="{{ form.whatsapp_invitation_sent.name }}" class="form-check-input" type="checkbox" checked><span class="form-check-sign"></span>WhatsApp group invitation</label></div>
+    {% else %}
+    <div class="form-check mt-1"><label class="form-check-label"><input name="{{ form.whatsapp_invitation_sent.name }}" class="form-check-input" type="checkbox"><span class="form-check-sign"></span>WhatsApp group invitation</label></div>
+    {% endif %}
+
+    {% if student.whatsapp_group_joined %}
+    <div class="form-check mt-1"><label class="form-check-label"><input name="{{ form.whatsapp_group_joined.name }}" class="form-check-input" type="checkbox" checked><span class="form-check-sign"></span>WhatsApp group joined</label></div>
+    {% else %}
+    <div class="form-check mt-1"><label class="form-check-label"><input name="{{ form.whatsapp_group_joined.name }}" class="form-check-input" type="checkbox"><span class="form-check-sign"></span>WhatsApp group joined</label></div>
+    {% endif %}
+</div>
+
+<div class="d-flex border rounded border-danger align-items-center p-3 gap-3">
+    <label class="h6 m-0">Status</label>
+    <input type="checkbox" name="status" class="bootstrap-switch" data-on-label="ON" data-off-label="OFF" checked>
+</div>

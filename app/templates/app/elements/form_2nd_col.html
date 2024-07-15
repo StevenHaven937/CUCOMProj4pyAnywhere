@@ -1,0 +1,124 @@
+<div class="row p-3">
+    {% if object.name %}
+    <h2>{{ object.name }}</h2>
+    {% else %}
+    <h2>New Student Entry Form</h2>
+    {% endif %}
+
+    <!-- Student name elements -->
+    <div class="row p-0 m-0 mt-2">
+        <div class="col"><label class="labels">First Name<span class="text-danger"> *</span></label><input type="text" class="form-control" name="{{ form.first_name.name }}" placeholder="first name" value="{{ student.first_name|title }}" required /></div>
+        <div class="col"><label class="labels">Middle Name</label><input type="text" class="form-control" name="{{ form.middle_name.name }}" placeholder="middle name" value="{{ student.middle_name|title }}" /></div>
+    </div>
+
+    <div class="col-md-6"><label class="labels">Last Name<span class="text-danger"> *</span></label><input type="text" class="form-control" name="{{ form.last_name.name }}" placeholder="last name" value="{{ student.last_name|title }}" required /></div>
+
+    <!-- CUCOM E-mail address element -->
+    <div class="col-md-12">
+        <label class="labels">CUCOM E-mail Address</label>
+        <div class="input-group">
+            <div class="input-group-prepend"><div class="input-group-text"><i class="tim-icons icon-email-85"></i></div></div>
+            <input type="text" class="form-control" name="{{ form.cucom_email_address.name }}" placeholder="CUCOM E-mail Address" value="{{ student.cucom_email_address|lower }}" />
+        </div>
+    </div>
+
+    <!-- E-mail address element -->
+    <div class="col-md-12">
+        <label class="labels">E-mail Address</label>
+        <div class="input-group">
+            <div class="input-group-prepend"><div class="input-group-text"><i class="tim-icons icon-email-85"></i></div></div>
+            <input type="text" class="form-control" name="{{ form.email_address.name }}" placeholder="Primary E-mail Address" value="{{ student.email_address|lower }}" />
+        </div>
+    </div>
+
+    <!-- Gap element -->
+    <span class="m-2"></span>
+
+    <!-- Joined & current term dropdown elements -->
+    <div class="col-md-6">
+        <label class="labels">Joined term<span class="text-danger"> *</span></label>
+        <select name="{{ form.joined_term.name }}" class="form-select" required>
+            {% for value, option in term_options.items %}
+            {% if student.joined_term == value %}
+            <option selected>{{ option }}</option>
+            {% else %}
+            <option value="{{ value }}">{{ option }}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-6">
+        <label class="labels">Current term<span class="text-danger"> *</span></label>
+        <select name="{{ form.current_term.name }}" class="form-select" required>
+            {% for value, option in term_options.items %}
+            {% if student.current_term == value %}
+            <option selected>{{ option }}</option>
+            {% else %}
+            <option value="{{ value }}">{{ option }}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+    </div>
+
+    <!-- Gap element -->
+    <span class="m-2"></span>
+
+    <!-- Academic year, DOB, and gender elements -->
+    <div class="col-md-12"><label class="labels">Academic Year<span class="text-danger"> *</span></label><input type="text" class="form-control" name="{{ form.academic_year.name }}" placeholder="eg: {{ year }}" value="{{ student.academic_year }}" maxlength="4" required /></div>
+    <div class="col-md-12"><label class="labels">Date of Birth</label><input type="date" id="bday" class="form-control" name="{{ form.date_of_birth.name }}" value="{{ student.date_of_birth|date:'Y-m-d' }}" /></div>
+    <div class="col-md-6">
+        <label class="labels">Gender<span class="text-danger"> *</span></label>
+        <select name="{{ form.gender.name }}" class="form-select" required>
+            {% for val, option in gender_options.items %}
+            {% if option ==  student.gender %}
+            <option selected>{{ option }}</option>
+            {% else %}
+            <option value="{{ val }}">{{ option }}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+    </div>
+
+    <!-- Gap element -->
+    <span class="m-2"></span>
+
+    <!-- Intake radio element -->
+    <label class="labels mx-1">Intake<span class="text-danger"> *</span></label>
+    {% for value, option in intake_options.items %}
+    <div class="col">
+        <div class="form-check form-check-radio form-check-inline m-0">
+            <label class="form-check-label">
+                {% if value == student.intake %}
+                <input class="form-check-input" type="radio" name="{{ form.intake.name }}" id="intake_id" value="{{ value }}" required checked>
+                {% else %}
+                <input class="form-check-input" type="radio" name="{{ form.intake.name }}" id="intake_id" value="{{ value }}" required>
+                {% endif %}
+                <span class="form-check-sign"></span>
+                {{option}}
+            </label>
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- Gap element -->
+    <span class="m-2"></span>
+
+    <!-- Country & admission elements -->
+    <div class="col-md-6"><label class="labels">Country</label><input name="{{ form.country.name }}" type="text" class="form-control" id="country" placeholder="country" value="{{ student.country|title }}" /></div>
+    <div class="col-md-6"><label class="labels">Admission partner</label><input name="{{ form.admission_partner.name }}" type="text" class="form-control" value="{{ student.admission_partner }}" placeholder="eg: SME" /></div>
+
+    <!-- Gap element -->
+    <span class="my-1"></span>
+
+    <!-- Notes element -->
+    <div class="col-md-12"><label class="labels">Notes:</label><textarea class="form-control" name="{{ form.notes.name }}" placeholder="Leave a comment here" id="office_notes">{{ student.notes }}</textarea></div>
+    
+    <!-- Submit button -->
+    <div class="card-footer mt-0">
+        <!-- Submit button -->
+        <div class="d-flex justify-content-center gap-3">
+            <a class="btn btn-outline-secondary" href="{% url 'students' %}">Cancel</a>
+            <button class="btn btn-info profile-button" type="submit">Save Profile</button>
+        </div>
+    </div>
+</div>

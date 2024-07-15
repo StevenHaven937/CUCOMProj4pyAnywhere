@@ -1,0 +1,21 @@
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+            <div class="alert alert-{{ message.tags }} alert-with-icon" style="z-index: 1;">
+                <button class="close" type="button" aria-hidden="true" data-dismiss="alert" aria-label="close">
+                    <i class="tim-icons icon-simple-remove"></i>
+                </button>
+                <span data-notify="icon" class="tim-icons icon-bell-55"></span>
+                <span><b> Well done! - </b> {{ message }}</span>
+            </div>
+        {% elif message.tags == 'error' %}
+            <div class="alert alert-danger alert-with-icon">
+                <button class="close" type="button" aria-hidden="true" data-dismiss="alert" aria-label="close">
+                    <i class="tim-icons icon-simple-remove"></i>
+                </button>
+                <span data-notify="icon" class="tim-icons icon-support-17"></span>
+                <span><b> Oh snap! - </b> {{ message }}</span>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}

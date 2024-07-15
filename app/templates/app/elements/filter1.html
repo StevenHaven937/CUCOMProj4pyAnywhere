@@ -1,0 +1,79 @@
+{% load static %}
+
+<div class="card card-register">
+    <div class="card-header pb-1">
+        <img class="card-img" src="{% static 'app/img/square1.png' %}">
+        <h4 class="card-title mt-5">Filter</h4>
+    </div>
+    <div class="card-body">
+        <form class="d-flex p-0 m-0" action="." method="get">
+            <div class="container p-2">
+                <div class="row row-cols-1 d-flex align-items-center">
+                    <div class="col">
+                        <div class="input-group mb-0">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="tim-icons icon-zoom-split"></i></span>
+                            </div>
+                            <input name="student_name" type="text" class="form-control" placeholder="Student name">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <select name="fees_confirmed" class="form-select">
+                            <option value="">Fee status</option>
+                            {% for val, op in fees_options.items %}
+                            <option value="{{ val }}">{{ op }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col">
+                        <select name="program" class="form-select">
+                            <option value="">Program</option>
+                            {% for val, op in program_options.items %}
+                            <option value="{{ val }}">{{ op }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col">
+                        <select name="current_term" class="form-select">
+                            <option value="">Current term</option>
+                            {% for val, op in term_options.items %}
+                            <option value="{{ val }}">{{ op }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row row-cols-1 d-flex align-items-center mt-3">
+                    <div class="col">
+                        <select name="intake" class="form-select">
+                            <option value="">Intake</option>
+                            {% for val, op in intake_options.items %}
+                            <option value="{{ val }}">{{ op }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col">
+                        <select name="academic_yr" class="form-select">
+                            <option value="">Academic year</option>
+                            {% for val, op in academic_year_options.items %}
+                            <option value="{{ val }}">{{ op }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col">
+                        <select name="welcome_mail" class="form-select">
+                            <option value="">Registration mail</option>
+                            <option value="True">Sent</option>
+                            <option value="False">Not sent</option>
+                        </select>
+                    </div>
+                    
+                    <div class="col"><button type="submit" class="btn btn-primary m-0">Filter</button></div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

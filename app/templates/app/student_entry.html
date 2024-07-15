@@ -1,0 +1,39 @@
+{% extends "app/layout.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="register-page">
+    <!-- Header -->
+    <div class="wrapper">
+        <div class="page-header" style="max-height:max-content;">
+            <div class="content">
+                <div class="container">
+                    <!-- Notification -->
+                    {% include 'app/elements/notification.html' %}
+
+                    <div class="row">
+                        <div class="col">
+                            <div id="square7" class="square square-7"></div>
+                            <div id="square8" class="square square-8"></div>
+                            <div class="card card-register">
+                                <div class="card-header d-flex justify-content-end gap-3 p-4"></div>
+                                <div class="card-body">{% include 'app/elements/admission_form.html' %}</div>
+                                <div class="card-footer mt-0"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="square1" class="square square-1"></div>
+                    <div id="square2" class="square square-2"></div>
+                    <div id="square3" class="square square-3"></div>
+                    <div id="square4" class="square square-4"></div>
+                    <div id="square5" class="square square-5"></div>
+                    <div id="square6" class="square square-6"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

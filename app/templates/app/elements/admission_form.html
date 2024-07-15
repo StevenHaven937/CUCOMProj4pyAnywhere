@@ -1,0 +1,13 @@
+<form class="form my-2 needs-validation" enctype="multipart/form-data" action="" method="post" novalidate>
+    {% csrf_token %}
+    <div class="row">
+        <!-- 1st column (profile picture element) -->
+        <div class="col-md-3 border-end">{% include "app/elements/form_1st_col.html" %}</div>
+
+        <!-- 2nd column -->
+        <div class="col-md-5 border-end">{% include "app/elements/form_2nd_col.html" %}</div>
+
+        <!-- 3rd column -->
+        <div class="col-md-4">{% include "app/elements/form_3rd_col.html" %}</div>
+    </div>
+</form>

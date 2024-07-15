@@ -1,0 +1,62 @@
+{% load my_tags %}
+
+<ul class="pagination justify-content-center">
+    {% with request.GET.urlencode|remove_page_param as clean_query_params %}
+
+        {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?{{ clean_query_params }}&page=1" aria-label="Previous">
+                    <span aria-hidden="true"><i class="tim-icons icon-double-left" aria-hidden="true"></i></span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?{{ clean_query_params }}&page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true"><i class="tim-icons icon-minimal-left" aria-hidden="true"></i></span>
+                </a>
+            </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href="?{{ clean_query_params }}&page=1" aria-label="Previous">
+                <span aria-hidden="true"><i class="tim-icons icon-double-left" aria-hidden="true"></i></span>
+            </a>
+        </li>
+        <li class="page-item disabled">
+            <a class="page-link" href="?{{ clean_query_params }}&page=1" aria-label="Previous">
+                <span aria-hidden="true"><i class="tim-icons icon-minimal-left" aria-hidden="true"></i></span>
+            </a>
+        </li>
+        {% endif %}
+
+        {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?{{ clean_query_params }}&page={{ page_obj.previous_page_number }}" aria-label="Previous">{{ page_obj.previous_page_number }}</a></li>
+        {% endif %}
+        <li class="page-item active"><a class="page-link" href="?{{ clean_query_params }}&page={{ page_obj.number }}" aria-label="Current">{{ page_obj.number }}</a></li>
+        {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?{{ clean_query_params }}&page={{ page_obj.next_page_number }}" aria-label="Current">{{ page_obj.next_page_number }}</a></li>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?{{ clean_query_params }}&page={{ page_obj.next_page_number }}" aria-label="Next">
+                <span aria-hidden="true"><i class="tim-icons icon-minimal-right" aria-hidden="true"></i></span>
+            </a>
+        </li>
+            <li class="page-item">
+                <a class="page-link" href="?{{ clean_query_params }}&page={{ page_obj.paginator.num_pages }}" aria-label="Next">
+                    <span aria-hidden="true"><i class="tim-icons icon-double-right" aria-hidden="true"></i></span>
+                </a>
+            </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" href="?{{ clean_query_params }}&page=" aria-label="Next">
+                <span aria-hidden="true"><i class="tim-icons icon-minimal-right" aria-hidden="true"></i></span>
+            </a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?{{ clean_query_params }}&page={{ page_obj.paginator.num_pages }}" aria-label="Next">
+                <span aria-hidden="true"><i class="tim-icons icon-double-right" aria-hidden="true"></i></span>
+            </a>
+        </li>
+        {% endif %}
+    {% endwith %}
+</ul>
